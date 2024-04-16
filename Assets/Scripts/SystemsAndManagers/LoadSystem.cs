@@ -1,30 +1,39 @@
+using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.ResourceManagement.AsyncOperations;
-using UnityEngine;
+using UnityEngine.ResourceManagement.ResourceProviders;
+using UnityEngine.SceneManagement;
 
 public class LoadSystem : MonoBehaviour
 {
-    public AssetReference levelPrefabReference; 
+    public AssetReference sceneToLoad; 
 
-    private void Start()
+    void Start()
     {
-        LoadLevel();
+        LoadScene();
     }
 
-    private void LoadLevel()
+    public void LoadScene()
     {
-        levelPrefabReference.InstantiateAsync().Completed += OnLevelLoaded;
-    }
-
-    private void OnLevelLoaded(AsyncOperationHandle<GameObject> obj)
-    {
-        if (obj.Status == AsyncOperationStatus.Succeeded)
+        if (sceneToLoad.RuntimeKeyIsValid())
         {
-            GameObject levelInstance = obj.Result;
+            sceneToLoad.LoadSceneAsync(LoadSceneMode.Additive).Completed += OnSceneLoaded;
         }
         else
         {
-            Debug.LogError("Не удалось загрузить префаб уровня");
+            Debug.LogError("Runtime Key is not valid. Please check the addressable settings.");
+        }
+    }
+
+    private void OnSceneLoaded(AsyncOperationHandle<SceneInstance> obj)
+    {
+        if (obj.Status == AsyncOperationStatus.Succeeded)
+        {
+            Debug.Log("Scene loaded successfully.");
+        }
+        else
+        {
+            Debug.LogError("Scene failed to load: " + obj.OperationException.ToString());
         }
     }
 }

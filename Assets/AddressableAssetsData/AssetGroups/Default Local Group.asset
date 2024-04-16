@@ -17,8 +17,13 @@ MonoBehaviour:
     m_SerializedData: []
   m_GUID: 0130d00b8bd7f2140ba1520cc3ad8057
   m_SerializeEntries:
-  - m_GUID: 86eaf8987323f894aa88b5baf96ad67a
+  - m_GUID: fa3e1f8b18a7d0f439c325acd3ae7db8
     m_Address: Assets/Addresables/GameScenes.prefab
+    m_ReadOnly: 0
+    m_SerializedLabels: []
+    FlaggedDuringContentUpdateRestriction: 0
+  - m_GUID: 80df5df9e45279f4598a4b74fe24dc27
+    m_Address: Assets/Addresables/GameScenes 1.unity
     m_ReadOnly: 0
     m_SerializedLabels: []
     FlaggedDuringContentUpdateRestriction: 0
